@@ -39,8 +39,8 @@ def get_cookie():
 def auto_publish(title,shorttitle,picname,maintext,pub_time):
     url = 'https://www.gundamc.com/admin/article_add.php'
     # 加载cookie
-    cookie = http.cookiejar.MozillaCookieJar('cookie.txt')
-    cookie.load('cookie.txt', ignore_discard=True, ignore_expires=True)
+    #cookie = http.cookiejar.MozillaCookieJar('cookie.txt')
+    #cookie.load('cookie.txt', ignore_discard=True, ignore_expires=True)
     data=MultipartEncoder(
         fields={
             'channelid':'1',
@@ -92,15 +92,15 @@ def auto_publish(title,shorttitle,picname,maintext,pub_time):
     r = requests.post(url,data=data,headers=headers)
     #print(r.text)
 
-def main():
-    #get_cookie()
-    title = "Test"
-    shorttitle="Test_subtitle"
-    picname=""
-    maintext="Test123"
-    for i in range(1):
-        auto_publish(title,shorttitle,picname,maintext)
+#def main():
+#    get_cookie()
+#    title = "Test"
+#    shorttitle="Test_subtitle"
+#    picname=""
+#    maintext="Test123"
+#    for i in range(1):
+#        auto_publish(title,shorttitle,picname,maintext)
 
 
-if __name__=='__main__':
-    main()
+#if __name__=='__main__':
+#    main()

@@ -46,7 +46,7 @@ def check_info():
     for i in range(n):
         pub_time = data['data'][i]['heading']
         print("发布日期: "+ pub_time)
-        mw.txt.insert(END,"发布日期: "+ pub_time)
+        mw.Change("发布日期: "+ pub_time +"\n")
         m = len(data['data'][i]['articles'])
         for j in range(m):
             title = data['data'][i]['articles'][j]['title']
@@ -54,13 +54,14 @@ def check_info():
                 shorttitle = data['data'][i]['articles'][j]['summaryText']
             else:
                 shorttitle=""
-            mw.txt.insert(END,"标题: "+title)
-            mw.txt.insert(END,"副标题: "+shorttitle)
+            mw.Change("标题: "+ title +"\n")
+            mw.Change("------------------------------------------------------------" + "\n")
             print("标题: "+title)
             print("副标题: "+shorttitle)
          
 
-def parse_page_index(html):
+def parse_page_index():
+    html = get_page_index(1)
     data = json.loads(html)
     n = len(data['data'])
     for i in range(n):
@@ -77,6 +78,7 @@ def parse_page_index(html):
             url = "https://cn.gundam.info"+data['data'][i]['articles'][j]['url']
             picname = "https://cn.gundam.info"+data['data'][i]['articles'][j]['displayImage']
             print("正在处理 :" + data['data'][i]['articles'][j]['title'])
+            mw.Change("正在处理 :" + data['data'][i]['articles'][j]['title'] + "\n")
             html = get_page_detil(url)
             parse_page_detail(html,title,shorttitle,picname,pub_time)
 
@@ -94,6 +96,7 @@ def parse_page_index(html):
 
 def get_page_detil(url):
     print("正在访问页面数据...")
+    mw.Change("正在访问页面数据..." + "\n")
     response = requests.get(url)
     try:
         if response.status_code==200:
@@ -109,6 +112,7 @@ def parse_page_detail(html,title,shorttitle,picname,pub_time):
     #for x in soup.find_all('div', attrs={'class': "c-text section",'class':"sw06-gallery parbase section"}):
        # print(x)
     print("正在处理页面数据...")
+    mw.Change("正在处理页面数据..." + "\n")
     data = soup.find_all(attrs={'class': "l-container l-container-align- giflC-detailArticle"})
     data_str = str(data)
     temp = data_str.rfind('<div class="gl01-headingTitle parbase section">')
@@ -124,12 +128,13 @@ def parse_page_detail(html,title,shorttitle,picname,pub_time):
     #    data_str = data_str[:index] + data_str[end + 17:]
     #    index = data_str.find('<!-- [GL16] -->')
     print("正在发布...")
+    mw.Change("正在发布..." + "\n")
     auto_publish.auto_publish(title,shorttitle,picname,data_str,pub_time)
     print("发布成功")
+    mw.Change("发布成功!!!" + "\n")
 
 def main():
-    html = get_page_index(1)
-    parse_page_index(html)
+	check_info()
 
 if __name__=='__main__':
     main()
