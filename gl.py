@@ -1,0 +1,3 @@
+global pageLimit
+global subCategory
+global tempString

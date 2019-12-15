@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{a7994111-eec3-4bea-8f9e-74e668722e66}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>index_spider.py</StartupFile>
+    <StartupFile>main_spider.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -23,8 +23,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auto_publish.py" />
+    <Compile Include="gl.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="detail_spider.py" />
-    <Compile Include="index_spider.py" />
+    <Compile Include="main_spider.py" />
+    <Compile Include="main_window.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.6" />

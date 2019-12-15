@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
 import detail_spider
 import auto_publish
+import gl
+import main_window as mw
 
 def get_page_index(pageNo):
     data={
@@ -14,11 +16,11 @@ def get_page_index(pageNo):
         'listType': 'group',
         'groupType': 'groupbypublishdate',
         'navigation': 'pagination',
-        'pageLimit': '5',                  #数量
+        'pageLimit': gl.pageLimit,                  #数量
         'numberOfArticles': '1',
         'dateType': 'publishdate',
         'category': 'news',
-        'subCategory': 'hot-topics',            #频道，模型：gunpla 、资讯：info 、 游戏：games 、热门话题：hot-topics
+        'subCategory': gl.subCategory,            #频道，模型：gunpla 、资讯：info 、 游戏：games 、热门话题：hot-topics
         'disableDate': 'true',
         'filterSeriesTags': '',
         'filterSubCategoryTags':'',
@@ -36,6 +38,27 @@ def get_page_index(pageNo):
     except RequestException:
         print('请求索引页出错')
         return None
+
+def check_info():
+    html = get_page_index(1)
+    data = json.loads(html)
+    n = len(data['data'])
+    for i in range(n):
+        pub_time = data['data'][i]['heading']
+        print("发布日期: "+ pub_time)
+        mw.txt.insert(END,"发布日期: "+ pub_time)
+        m = len(data['data'][i]['articles'])
+        for j in range(m):
+            title = data['data'][i]['articles'][j]['title']
+            if 'summaryText' in data['data'][i]['articles'][j]:
+                shorttitle = data['data'][i]['articles'][j]['summaryText']
+            else:
+                shorttitle=""
+            mw.txt.insert(END,"标题: "+title)
+            mw.txt.insert(END,"副标题: "+shorttitle)
+            print("标题: "+title)
+            print("副标题: "+shorttitle)
+         
 
 def parse_page_index(html):
     data = json.loads(html)
