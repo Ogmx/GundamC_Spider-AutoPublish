@@ -1,0 +1,9 @@
+# Netscape HTTP Cookie File
+# http://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file!  Do not edit.
+
+www.gundamc.com	FALSE	/	FALSE	1573647259	DedeLoginTime	1573560855
+www.gundamc.com	FALSE	/	FALSE	1573647259	DedeLoginTime__ckMd5	d7f0eaf904247672
+www.gundamc.com	FALSE	/	FALSE	1573647259	DedeUserID	1
+www.gundamc.com	FALSE	/	FALSE	1573647259	DedeUserID__ckMd5	f672ab8777fee8ed
+www.gundamc.com	FALSE	/	FALSE		PHPSESSID	l5f5v84grtip8ud2rcevl7k563
